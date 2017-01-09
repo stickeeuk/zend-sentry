@@ -185,7 +185,7 @@ class Module
             $exceptionStrategy = $event->getApplication()->getServiceManager()->get('HttpExceptionStrategy');
             $exceptionStrategy->detach($this->eventManager);
         }
-        
+
         // Check if script is running in console
         $exceptionStrategy = (PHP_SAPI == 'cli') ? (new SentryConsoleStrategy()) : (new SentryHttpStrategy());
         $exceptionStrategy->attach($this->eventManager);
@@ -211,7 +211,7 @@ class Module
      */
     protected function setupJavascriptLogging(MvcEvent $event)
     {
-        $viewHelper = $event->getApplication()->getServiceManager()->get('viewhelpermanager')->get('headscript');
+        $viewHelper = $event->getApplication()->getServiceManager()->get('ViewHelperManager')->get('headscript');
         /** @noinspection PhpUndefinedMethodInspection */
         $viewHelper->offsetSetFile(0, '//cdn.ravenjs.com/3.8.0/raven.min.js');
         $publicApiKey = $this->convertKeyToPublic($this->config['zend-sentry']['sentry-api-key']);
